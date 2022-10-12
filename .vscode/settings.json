@@ -1,0 +1,10 @@
+{
+	"editor.minimap.autohide": false,
+	"emmet.includeLanguages": {
+		"javascript": "javascriptreact"
+	},
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"synthwave84.brightness": 0.45,
+	"synthwave84.disableGlow": true
+}
