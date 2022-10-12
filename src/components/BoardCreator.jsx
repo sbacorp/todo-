@@ -4,14 +4,14 @@ function Form({boards, setBoards}) {
 
 	const [value, setValue] = React.useState('')
 	const addboardHandler = (name) => {
+		
 		const tempBoards = [...boards];
 		tempBoards.push({
-			id: Date.now() + Math.random() * 2,
+			id: Math.floor(Date.now() + Math.random()),
 			title: name,
 			items: [],
 		});
 		setBoards(tempBoards);
-		setValue('')
 	};
   return (
 		<div className="form">
@@ -23,11 +23,14 @@ function Form({boards, setBoards}) {
 				onChange={(e) => setValue(e.target.value)}
 				placeholder="введите название доски"
 			/>
-			<button onClick={()=>value&&addboardHandler(value)} className="form__button">
+			<button
+				onClick={() => {value.trim().length && addboardHandler(value);setValue("");}}
+				className="form__button"
+			>
 				Подтвердить
 			</button>
 		</div>
-  );
+	);
 }
 
 export default Form

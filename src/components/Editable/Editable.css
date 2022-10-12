@@ -1,0 +1,76 @@
+.editable {
+  width: 100%;
+}
+
+.editable_display {
+  margin-top: 10px;
+border-radius: 15px;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  border-radius: 3px;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid darkcyan;
+  cursor: pointer;
+  width: fit-content;
+  transition: 200ms;
+}
+
+.editable_display:hover {
+  background-color: darkcyan;
+}
+
+.editable_edit {
+  margin-top: 10px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editable_edit input {
+  margin-top: 10px;
+  border: 2px solid darkcyan;
+  border-radius: 15px;
+  outline: none;
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.editable_edit_footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.editable_edit_footer button {
+
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+  background-color: darkcyan;
+  color: #fff;
+  border: 1px solid darkcyan;
+  transition: 100ms ease;
+  padding: 10px;
+}
+.editable_edit_footer button:hover {
+  background-color: rgba(27, 27, 37, 1);
+}
+
+.editable_edit_footer button:active {
+  transform: translateY(2px);
+}
+
+.editable_edit_footer .closeIcon {
+  background-color: darkcyan;
+   padding: 10px;
+  border: 1px solid darkcyan;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+.editable_edit_footer .closeIcon:hover {
+  background-color: rgba(27, 27, 37, 1);
+}

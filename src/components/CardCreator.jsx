@@ -13,7 +13,7 @@ function CardCreator({ addCardHandler , bid}) {
 			/>
 			<button
 				onClick={(e) => {
-					value && addCardHandler(bid, value); setValue('')
+					value.trim().length && addCardHandler(bid, value); setValue('')
 				}} 
 				className="creator__button"
 			>
