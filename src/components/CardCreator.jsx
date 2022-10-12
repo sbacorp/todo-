@@ -5,6 +5,9 @@ function CardCreator({ addCardHandler , bid}) {
 	return (
 		<div className="card__creator">
 			<input
+				onKeyPress={(e) => {
+					value.trim().length && e.key === "Enter" && addCardHandler(bid,value, setValue);
+				}}
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				className="creator__input"
@@ -13,8 +16,9 @@ function CardCreator({ addCardHandler , bid}) {
 			/>
 			<button
 				onClick={(e) => {
-					value.trim().length && addCardHandler(bid, value); setValue('')
-				}} 
+					value.trim().length && addCardHandler(bid, value, setValue);
+					setValue("");
+				}}
 				className="creator__button"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" height="31" width="31">

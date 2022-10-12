@@ -60,6 +60,7 @@ function CardInfo({ boards, updateCard }) {
 	updateCard(board.id, values.id, values);
 	}, [values]);
 
+	
 	return (
 		<div className="cardPreview">
 			<div className="cardInfo__modal">

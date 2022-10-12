@@ -12,11 +12,13 @@ function Form({boards, setBoards}) {
 			items: [],
 		});
 		setBoards(tempBoards);
+		setValue('');
 	};
   return (
 		<div className="form">
 			<h2 className="form__title">Создать доску</h2>
 			<input
+				onKeyPress={(e) => {value.trim().length && e.key === "Enter" && addboardHandler(value);}}
 				className="form__input"
 				type="text"
 				value={value}
@@ -24,7 +26,9 @@ function Form({boards, setBoards}) {
 				placeholder="введите название доски"
 			/>
 			<button
-				onClick={() => {value.trim().length && addboardHandler(value);setValue("");}}
+				onClick={() => {
+					value.trim().length && addboardHandler(value);
+				}}
 				className="form__button"
 			>
 				Подтвердить

@@ -23,8 +23,8 @@ const location = useLocation();
 	};
 	const dragOverHandler = (e) => {
 		e.preventDefault();
-		if (e.target.className === "item") {
-			e.target.style.boxShadow = "2px 2px 3px #000";
+		if (e.target.className === "card") {
+			e.target.style.boxShadow = "0px 4px 5px darkcyan";
 		}
 	};
 	const dropCardHandler = (e, board) => {
@@ -68,7 +68,7 @@ const location = useLocation();
 		);
 	};
 
-	const addCardHandler = (boardId, title) => {
+	const addCardHandler = (boardId, title, setValue) => {
 		const index = boards.findIndex((item) => item.id === boardId);
 		console.log(index);
 		if (index < 0) return;
@@ -80,6 +80,7 @@ const location = useLocation();
 			tasks: [],
 		});
 		setBoards(tempBoards);
+		setValue("");
 	};
 	const removeBoardHandler = (boardId) => {
 		const index = boards.findIndex((item) => item.id === boardId);
@@ -96,6 +97,7 @@ const location = useLocation();
 		items.splice(cardIndex, 1);
 		setBoards(tempBoards);
 	};
+
 
 	return (
 		<div className="main">
@@ -134,11 +136,7 @@ const location = useLocation();
 							</div>
 
 							<div className="board__items">
-								{!board.items.length ? (
-									<div className="board__title">
-										перетащите или добавьте задачу
-									</div>
-								) : (
+								{
 									board.items.map((item) => (
 										<Link
 											key={item.id}
@@ -150,17 +148,18 @@ const location = useLocation();
 											<div
 												className="card"
 												draggable={true}
-												onDragStart={(e) =>
-													dragStartHandler(e, board, item)
-												}
+												onDragStart={(e) => dragStartHandler(e, board, item)}
 												onDragLeave={(e) => dragLeaveHandler(e)}
 												onDragEnd={(e) => dragEndHandler(e)}
 												onDragOver={(e) => dragOverHandler(e)}
 												onDrop={(e) => dropHandler(e, item, board)}
 											>
 												<div className="card__title">{item.title}</div>
+												<div style={{'justifySelf':'flex-end'}}>{item.tasks?.filter((item) => item.completed)?.length}/
+											{item.tasks?.length}</div>
+											
 												<svg
-												className="card-remove"
+													className="card-remove"
 													style={{ justifySelf: "right" }}
 													onClick={(e) =>
 														removeCardHandler(e, item.id, board.id)
@@ -175,7 +174,7 @@ const location = useLocation();
 											</div>
 										</Link>
 									))
-								)}
+								}
 							</div>
 							<CardCreator bid={board.id} addCardHandler={addCardHandler} />
 						</div>
