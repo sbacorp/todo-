@@ -3,18 +3,37 @@ import { useParams, useNavigate } from "react-router-dom";
 import Editable from "../components/Editable/Editable";
 import "./CardInfo.css";
 
-function CardInfo({ boards, updateCard }) {
+function CardInfo({ boards,  setBoards }) {
 	const navigate = useNavigate();
 	const { id } = useParams();
+
 	const board = boards.find((obj) => {
 		return obj.items.find((item) => item.id === Number(id));
 	});
+
 
 	const card = board.items.find((item) => {
 		return item.id === Number(id);
 	});
 
 	const [values, setValues] = React.useState(card);
+
+	const updateCard = (bid, cid, card) => {
+
+		const index = boards.findIndex((item) => item.id === bid);
+		if (index < 0) return;
+
+		const tempBoards = [...boards];
+		const items = tempBoards[index].items;
+
+		const cardIndex = items.findIndex((item) => item.id === cid);
+		if (cardIndex < 0) return;
+
+		tempBoards[index].items[cardIndex] = card;
+
+		setBoards(tempBoards);
+	};
+
 
 	const updateTitle = (value) => {
 		setValues({ ...values, title: value });
@@ -57,10 +76,10 @@ function CardInfo({ boards, updateCard }) {
 		});
 	};
 	React.useEffect(() => {
-	updateCard(board.id, values.id, values);
+		updateCard(board.id, values.id, values);
 	}, [values]);
 
-	
+
 	return (
 		<div className="cardPreview">
 			<div className="cardInfo__modal">
