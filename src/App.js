@@ -6,11 +6,10 @@ import React, { useState } from "react";
 function App() {
 	window.addEventListener('storage', ()=>{
 		setTimeout(() => {
-				setBoards(JSON.parse(localStorage.getItem("boards")) || []);	
+			setBoards(JSON.parse(localStorage.getItem("boards")) || []);
 		}, 500);
-		
-	})
 
+	})
 	const location = useLocation();
 	const background = location.state && location.state.background;
 	const [boards, setBoards] = useState(
@@ -21,20 +20,7 @@ function App() {
 		localStorage.setItem("boards", JSON.stringify(boards));
 	}, [boards]);
 
-	const updateCard = (bid, cid, card) => {
-		const index = boards.findIndex((item) => item.id === bid);
-		if (index < 0) return;
 
-		const tempBoards = [...boards];
-		const items = tempBoards[index].items;
-
-		const cardIndex = items.findIndex((item) => item.id === cid);
-		if (cardIndex < 0) return;
-
-		tempBoards[index].items[cardIndex] = card;
-
-		setBoards(tempBoards);
-	};
 
 	return (
 		<div className="App">
@@ -43,14 +29,17 @@ function App() {
 					path="/"
 					element={<Main boards={boards} setBoards={setBoards} />}
 				>
-					<Route path="modal/:id" element={<ItemPreview boards={boards} />} />
+					<Route
+						path="modal/:id"
+						element={<ItemPreview boards={boards} setBoards={setBoards} />}
+					/>
 				</Route>
 			</Routes>
 			{background && (
 				<Routes>
 					<Route
 						path="modal/:id"
-						element={<ItemPreview updateCard={updateCard} boards={boards} />}
+						element={<ItemPreview setBoards={setBoards} boards={boards} />}
 					/>
 				</Routes>
 			)}
