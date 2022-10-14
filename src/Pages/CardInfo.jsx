@@ -2,8 +2,12 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Editable from "../components/Editable/Editable";
 import "./CardInfo.css";
+import {StoreContext} from "../utils/store";
 
-function CardInfo({ boards,  setBoards }) {
+function CardInfo() {
+	const {
+		boards, setBoards
+	} = React.useContext(StoreContext)
 	const navigate = useNavigate();
 	const { id } = useParams();
 
@@ -91,19 +95,19 @@ function CardInfo({ boards,  setBoards }) {
 						/>
 					</svg>
 				</button>
-				<div className="cardinfo__box">
-					<div className="cardinfo_box_title">
+				<div className="cardInfo__box">
+					<div className="cardInfo_box_title">
 						<p>Название</p>
 					</div>
 					<Editable
 						defaultValue={values.title}
 						text={values.title}
-						placeholder="Enter Title"
+						placeholder="Введите название"
 						onSubmit={updateTitle}
 					/>
 				</div>
-				<div className="cardinfo_box">
-					<div className="cardinfo_box_title">
+				<div className="cardInfo_box">
+					<div className="cardInfo_box_title">
 						<p>Описание</p>
 					</div>
 					<Editable
@@ -113,13 +117,13 @@ function CardInfo({ boards,  setBoards }) {
 						onSubmit={updateDesc}
 					/>
 				</div>
-				<div className="cardinfo_box">
-					<div className="cardinfo_box_title">
+				<div className="cardInfo_box">
+					<div className="cardInfo_box_title">
 						<p>Пункты</p>
 					</div>
-					<div className="cardinfo_box_task_list">
+					<div className="cardInfo_box_task_list">
 						{values.tasks?.map((item) => (
-							<div key={item.id} className="cardinfo_box_task_checkbox">
+							<div key={item.id} className="cardInfo_box_task_checkbox">
 								<input
 									type="checkbox"
 									defaultChecked={item.completed}

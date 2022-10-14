@@ -1,16 +1,57 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import {StoreContext} from "../utils/store";
 function Card({
                   item,
                   board,
-                  dragStartHandler,
-                  dragLeaveHandler,
-                  dragEndHandler,
-                  dragOverHandler,
-                  dropHandler,
                   removeCardHandler,
               }) {
+
+    const {
+        boards, setBoards,currentBoard, setCurrentBoard,currentItem, setCurrentItem
+    } = React.useContext(StoreContext)
     const location = useLocation();
+
+
+    const dragStartHandler = (board, item) => {
+        setCurrentBoard(board);
+        setCurrentItem(item);
+    };
+
+    const dragEndHandler = (e) => {
+        e.target.style.boxShadow = "none";
+    };
+
+    const dragLeaveHandler = (e) => {
+        e.target.style.boxShadow = "none";
+    };
+    const dragOverHandler = (e) => {
+        e.preventDefault();
+        if (e.target.className === "card") {
+            e.target.style.boxShadow = "0px 4px 5px darkcyan";
+        }
+    };
+    const dropHandler = (e, board, item) => {
+        e.target.style.boxShadow = "none";
+        e.stopPropagation();
+        e.preventDefault();
+        const currentIndex = currentBoard.items.indexOf(currentItem);
+        if (currentIndex < -1 ) return;
+        currentBoard.items.splice(currentIndex, 1);
+        const dropIndex = board.items.indexOf(item);
+        board.items.splice(dropIndex + 1, 0, currentItem);
+        setBoards(
+            boards.map((b) => {
+                if (b.id === board.id) {
+                    return board;
+                }
+                if (b.id === currentBoard.id) {
+                    return currentBoard;
+                }
+                return b;
+            })
+        );
+    };
     return (
         <Link
             to={`/modal/${item.id}`}

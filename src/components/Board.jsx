@@ -1,22 +1,67 @@
 import React from "react";
 import CardCreator from "./CardCreator";
 import Card from "./Card";
+import {StoreContext} from "../utils/store";
+
+
 function Board({
-                   board,
-                   dragOverHandler,
-                   dropCardHandler,
-                   removeBoardHandler,
-                   addCardHandler,
-                   dragEndHandler,
-                   dragLeaveHandler,
-                   dragStartHandler,
-                   dropHandler,
-                   removeCardHandler,
-               }) {
+                   board}) {
+
+    const {
+        boards, setBoards,currentBoard, setCurrentBoard,currentItem, setCurrentItem
+    } = React.useContext(StoreContext)
+    const addCardHandler = (boardId, title, setValue) => {
+        const index = boards.findIndex((item) => item.id === boardId);
+        if (index < 0) return;
+
+        const tempBoards = [...boards];
+        tempBoards[index].items.push({
+            id: Date.now(),
+            title,
+            tasks: [],
+        });
+        setBoards(tempBoards);
+        setValue("");
+    };
+    const removeBoardHandler = (boardId) => {
+        const index = boards.findIndex((item) => item.id === boardId);
+        const tempBoards = [...boards];
+        tempBoards.splice(index, 1);
+        setBoards(tempBoards);
+    };
+    const removeCardHandler = (e, cid, bid) => {
+        e.preventDefault();
+        const index = boards.findIndex((item) => item.id === bid);
+        const tempBoards = [...boards];
+        const items = tempBoards[index].items;
+        const cardIndex = items.findIndex((item) => item.id === cid);
+        items.splice(cardIndex, 1);
+        setBoards(tempBoards);
+    };
+    const dropCardHandler = (e, board) => {
+        e.preventDefault();
+                if(e.target.className==='board') {
+                    board.items.push(currentItem);
+                    const currentIndex = currentBoard.items.indexOf(currentItem);
+                    currentBoard.items.splice(currentIndex, 1);
+                    setBoards(
+                        boards.map((b) => {
+                            if (b.id === board.id) {
+                                return board;
+                            }
+                            if (b.id === currentBoard.id) {
+                                return currentBoard;
+                            }
+                            return b;
+                        })
+                    );
+                }
+    };
+
     return (
         <div
             className="board"
-            onDragOver={(e) => dragOverHandler(e)}
+
             onDrop={(e) => dropCardHandler(e, board)}
         >
             <div className="board__top">
@@ -37,7 +82,7 @@ function Board({
             </div>
 
             <div className="board__items">
-                {board.items.map((item) => (<Card key={item.id} board={board} item={item} dragOverHandler={dragOverHandler} dragEndHandler={dragEndHandler} dragLeaveHandler={dragLeaveHandler} dragStartHandler={dragStartHandler} dropHandler={dropHandler} removeCardHandler={removeCardHandler}/>))}
+                {board.items.map((item) => (<Card key={item.id} board={board} item={item} boards={boards} setBoards={setBoards} setCurrentItem={setCurrentItem} currentBoard={currentBoard} setCurrentBoard={setCurrentBoard} currentItem={currentItem} removeCardHandler={removeCardHandler} />))}
             </div>
             <CardCreator bid={board.id} addCardHandler={addCardHandler} />
         </div>

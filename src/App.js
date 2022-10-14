@@ -1,9 +1,14 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import ItemPreview from "./Pages/CardInfo";
 import Main from "./Pages/Main";
-import React, { useState } from "react";
+import React from "react";
+import {StoreContext} from "./utils/store";
 
 function App() {
+
+	const {
+		boards, setBoards
+	} = React.useContext(StoreContext)
 	window.addEventListener('storage', ()=>{
 		setTimeout(() => {
 			setBoards(JSON.parse(localStorage.getItem("boards")) || []);
@@ -12,9 +17,7 @@ function App() {
 	})
 	const location = useLocation();
 	const background = location.state && location.state.background;
-	const [boards, setBoards] = useState(
-		JSON.parse(localStorage.getItem("boards")) || []
-	);
+
 
 	React.useEffect(() => {
 		localStorage.setItem("boards", JSON.stringify(boards));
@@ -27,11 +30,11 @@ function App() {
 			<Routes location={background || location}>
 				<Route
 					path="/"
-					element={<Main boards={boards} setBoards={setBoards} />}
+					element={<Main />}
 				>
 					<Route
 						path="modal/:id"
-						element={<ItemPreview boards={boards} setBoards={setBoards} />}
+						element={<ItemPreview />}
 					/>
 				</Route>
 			</Routes>
@@ -39,7 +42,7 @@ function App() {
 				<Routes>
 					<Route
 						path="modal/:id"
-						element={<ItemPreview setBoards={setBoards} boards={boards} />}
+						element={<ItemPreview />}
 					/>
 				</Routes>
 			)}
