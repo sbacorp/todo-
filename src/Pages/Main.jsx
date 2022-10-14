@@ -4,7 +4,7 @@ import Board from "../components/Board";
 import { StoreContext } from '../utils/store'
 function Main() {
 	const {
-		boards, setBoards,currentBoard, setCurrentBoard,currentItem, setCurrentItem
+		boards, setBoards
 	} = React.useContext(StoreContext)
 
 
@@ -25,12 +25,7 @@ function Main() {
 					boards.map((board) => (
 						<Board key={board.id}
 							   board={board}
-							   boards={boards}
-							   setBoards={setBoards}
-							   currentBoard={currentBoard}
-							   setCurrentBoard={setCurrentBoard}
-							   currentItem={currentItem}
-							   setCurrentItem={setCurrentItem}
+
 					/>
 
 					))

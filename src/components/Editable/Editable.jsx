@@ -26,7 +26,7 @@ function Editable(props) {
 						type="text"
 						value={inputText}
 						placeholder={props.placeholder || props.text}
-						onChange={(event) => setInputText(event.target.value)}
+						onChange={(e) => setInputText(e.target.value)}
 						autoFocus
 					/>
 					<div className="editable_edit_footer">
@@ -46,7 +46,7 @@ function Editable(props) {
 			) : (
 				<p
 					className={`editable_display ${
-						props.displayClass ? props.displayClass : ""
+						props.displayClass ? props.displayClass : "ellipsis"
 					}`}
 					onClick={() => setIsEditable(true)}
 				>

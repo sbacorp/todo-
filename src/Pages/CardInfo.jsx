@@ -131,8 +131,10 @@ function CardInfo() {
 										updateTask(item.id, event.target.checked)
 									}
 								/>
-								<p className={item.completed ? "completed" : ""}>{item.text}</p>
+								<p style={{maxWidth: '70%', display:"block"}} className={item.completed ? "completed" +
+									" ellipsis" : "ellipsis"}>{item.text}</p>
 								<svg
+
 									onClick={() => removeTask(item.id)}
 									xmlns="http://www.w3.org/2000/svg"
 									height="20"

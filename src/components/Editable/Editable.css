@@ -4,10 +4,10 @@
 
 .editable_display {
   margin-top: 10px;
-border-radius: 15px;
+  max-width: 100%;
+border-radius: 10px;
   font-size: 1.2rem;
   padding: 6px 12px;
-  border-radius: 3px;
   background-color: transparent;
   color: #fff;
   border: 1px solid darkcyan;
@@ -66,7 +66,7 @@ border-radius: 15px;
   background-color: darkcyan;
    padding: 10px;
   border: 1px solid darkcyan;
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 0 10px 10px 0;
   cursor: pointer;
   height: 40px;
   width: 40px;

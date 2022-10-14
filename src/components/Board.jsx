@@ -4,12 +4,12 @@ import Card from "./Card";
 import {StoreContext} from "../utils/store";
 
 
-function Board({
-                   board}) {
+function Board({board}) {
 
     const {
         boards, setBoards,currentBoard, setCurrentBoard,currentItem, setCurrentItem
-    } = React.useContext(StoreContext)
+    } = React.useContext(StoreContext);
+
     const addCardHandler = (boardId, title, setValue) => {
         const index = boards.findIndex((item) => item.id === boardId);
         if (index < 0) return;
@@ -65,7 +65,7 @@ function Board({
             onDrop={(e) => dropCardHandler(e, board)}
         >
             <div className="board__top">
-                <div className="board__title">{board.title}</div>
+                <div className="board__title ellipsis">{board.title}</div>
                 <button
                     className="button-delete"
                     onClick={() => removeBoardHandler(board.id)}

@@ -67,7 +67,6 @@ html,
 body {
 	height: 100%;
 	width: 100%;
-	font-size: 100%;
 	line-height: 1;
 	font-size: 14px;
 	-ms-text-size-adjust: 100%;
@@ -137,6 +136,7 @@ body::-webkit-scrollbar {
 	width: 20px;
 }
 
+
 body::-webkit-scrollbar-track {
 	background: rgb(27, 27, 37);
 }
@@ -148,7 +148,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 body {
-	scrollbar-width: thin;
 	background: rgb(27, 27, 37);
 }
 
@@ -156,17 +155,23 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
+.ellipsis{
+	user-select: none;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
 
 .main	{
 	height: 100vh;
 }
 .form {
-	padding: 60px 0 0px 50px;
+	padding: 60px 0 0 50px;
 	height: 30%;
 }
 .form__title {
 	user-select: none;
-  color: #fff;
+  	color: #fff;
 	font-weight: 700;
 	margin-bottom: 30px;
 	font-size: 32px;
@@ -202,6 +207,7 @@ code {
 	flex-shrink:0;
 	width: 100%;
 	overflow-x: scroll;
+	overflow-y: hidden;
 	height: 70%;
 	display: flex;
 	align-items: flex-start;
@@ -209,10 +215,7 @@ code {
 	flex-wrap: nowrap;
 }
 
-.boards {
-	scrollbar-width: thin;
-	scrollbar-color: #002244;
-}
+
 .boards::-webkit-scrollbar {
 	width: 10px;
 }
@@ -235,7 +238,7 @@ code {
 	justify-content: space-between;
 	width: 450px;
 	min-height: 200px;
-	max-height: 750px;
+	max-height: 90%;
 	border: 1px solid darkcyan;
 	border-radius: 15px;
 	padding: 5px;
@@ -248,11 +251,9 @@ code {
 	justify-content: space-between;
 }
 .board__items {
-	
-	scrollbar-width: thin;
 	width: 95%;
 	overflow-y: scroll;
-	scrollbar-color: #002244;
+
 }
 .board__items p{
 	color: #fff;
@@ -275,9 +276,9 @@ code {
 
 
 .board__title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	width: 70%;
+  	display: flex;
+  	align-items: center;
 	color: #fff;
 	height: 50px;
 	background-color: rgb(27, 27, 37);
@@ -298,11 +299,12 @@ code {
 	border-radius: 15px;
 }
 .card__title {
-	user-select: none;
-  font-size: 18px;
-  color: #fff;
-	user-select: none;
-}
+	 width: 50%;
+	 color: #fff;
+
+	 font-size: 22px;
+	 line-height: 1.5;
+ }
 
 .card-remove{
 	justify-self: flex-end ;

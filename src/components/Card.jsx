@@ -68,7 +68,7 @@ function Card({
                 onDragOver={(e) => dragOverHandler(e)}
                 onDrop={(e) => dropHandler(e, board, item)}
             >
-                <div className="card__title">{item.title.slice(0,15)}</div>
+                <div className="card__title ellipsis">{item.title.slice(0,15)}</div>
                 <div style={{ justifySelf: "flex-end" }}>
                     {item.tasks?.filter((item) => item.completed)?.length}/
                     {item.tasks?.length}
